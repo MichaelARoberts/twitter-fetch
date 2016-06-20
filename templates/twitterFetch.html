@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Twitter Fetch</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div ng-app="twitterApp" ng-controller="twitterController" ng-init="init()" class="container-fluid">
+      <div class="col-xs-4">
+        <h3 class="text-xs-center" style="margin-bottom:1rem;margin-top:1rem;">Twitter Fetch</h3>
+
+        <div class="col-xs-12">
+        </div>
+
+        <div class="col-xs-12" style="margin-bottom:1rem;">
+          <div id="userInfo">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Tweets</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">User Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Another link</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div id="tweetSearch">
+            <form>
+              <div class="form-group">
+                <label class="form-control-label">Username</label>
+                <input ng-model="username" type="text" class="form-control"/>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Number of Tweets</label>
+                <input ng-model="numberOf" type="number" class="form-control"/>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Retweets?</label>
+                <input ng-model="retweets" type="checkbox"/>
+              </div>
+
+              <button ng-click="fetchTweets()" class="btn btn-primary form-control">Go</button>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-xs-8">
+        <h3 class="text-xs-center" style="margin-bottom:1rem;margin-top:1rem;">Results</h3>
+        <div style="height:85vh;overflow:auto;">
+          <table class="table table-hover">
+            <tr ng-repeat="tweet in tweets">
+              <td>{{tweet.text}}</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+    <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <script src="../controllers/twitterFetchController.js"></script>
+  </body>
+</html>
