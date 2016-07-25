@@ -1,5 +1,5 @@
 'use strict'
-var twitterApp = angular.module('twitterApp', [])
+var twitterApp = angular.module('twitterApp', ['ngSanitize'])
 var utility = require('../utility/utility.js')
 var Twitter = require('twitter')
 
@@ -16,17 +16,41 @@ twitterApp.controller('twitterController', function($scope){
     $scope.retweets = false;
   }
 
-
   $scope.fetchTweets = function(){
     $scope.tweets = []
-    var params = {screen_name:$scope.username,count:$scope.numberOf,retweets:$scope.retweets}
+    var params = {screen_name:$scope.tweetUsername,count:$scope.numberOf,retweets:$scope.retweets}
 
     client.get('statuses/user_timeline', params, function(err, tweets, response){
       if(err)
         console.log(err)
 
-      $scope.tweets = tweets
-      $scope.$apply()
+      var newTweet = ""
+      $scope.tweets = []
+
+      for(var tweet of tweets){
+        for(var w of tweet.text.split(" ")){
+          if(w.slice(0,5) === "https"){
+            newTweet += '<a target="_blank" href="'+ w +'">'+ w +'</a> '
+          } else {
+            newTweet += w + " "
+          }
+        }
+        $scope.tweets.push(newTweet)
+        newTweet = ""
+        $scope.$apply()
+      }
+    })
+
+
+  }
+
+  $scope.fetchUser = function(){
+    var params = {screen_name:$scope.userUsername}
+    client.get('users/show', params,function(err, user, response){
+      if(err)
+        console.log(err)
+
+      $scope.userData = user
     })
   }
 })

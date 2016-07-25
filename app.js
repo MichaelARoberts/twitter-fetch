@@ -8,6 +8,11 @@ function createWindow() {
   win.loadURL(`file://${__dirname}/templates/twitterFetch.html`);
   //win.webContents.openDevTools();
 
+  win.on('new-window', function(event, url){
+    event.preventDefault();
+    open(url);
+  });
+
   win.on('closed', () => {
     win = null;
   });

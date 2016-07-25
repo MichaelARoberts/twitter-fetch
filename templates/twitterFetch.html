@@ -6,14 +6,14 @@
   </head>
   <body>
     <div ng-app="twitterApp" ng-controller="twitterController" ng-init="init()" class="container-fluid">
+
+      <!-- Left Bar -->
       <div class="col-xs-4">
         <h3 class="text-xs-center" style="margin-bottom:1rem;margin-top:1rem;">Twitter Fetch</h3>
 
-        <div class="col-xs-12">
-        </div>
-
-        <div class="col-xs-12" style="margin-bottom:1rem;">
-          <div id="userInfo">
+        <!-- Navigation Bar -->
+        <div class="col-xs-12" style="margin-bottom:1rem;" id="userInfo">
+          <div >
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link active" href="#">Tweets</a>
@@ -28,12 +28,13 @@
           </div>
         </div>
 
-        <div class="col-xs-12">
-          <div id="tweetSearch">
+        <!-- Area searching for tweets -->
+        <div class="col-xs-12" style="margin-bottom:1rem;" id="tweetSearch">
+          <div >
             <form>
               <div class="form-group">
                 <label class="form-control-label">Username</label>
-                <input ng-model="username" type="text" class="form-control"/>
+                <input ng-model="tweetUsername" type="text" class="form-control"/>
               </div>
 
               <div class="form-group">
@@ -50,23 +51,25 @@
             </form>
           </div>
         </div>
-
-
       </div>
+
+      <!-- Right Bar/ Results Area -->
       <div class="col-xs-8">
         <h3 class="text-xs-center" style="margin-bottom:1rem;margin-top:1rem;">Results</h3>
-        <div style="height:85vh;overflow:auto;">
-          <table class="table table-hover">
-            <tr ng-repeat="tweet in tweets">
-              <td>{{tweet.text}}</td>
-            </tr>
-          </table>
+        <div id="tweetResults">
+          <div style="height:85vh;overflow:auto;">
+            <table class="table table-hover">
+              <tr ng-repeat="tweet in tweets">
+                <td ng-bind-html="tweet"></td>
+              </tr>
+            </table>
+          </div>
         </div>
-
       </div>
-    </div>
+
     <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.7/angular-sanitize.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
     <script src="../controllers/twitterFetchController.js"></script>
   </body>
